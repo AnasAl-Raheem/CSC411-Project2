@@ -1,0 +1,516 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Programming/Coding Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+% This template uses a Perl script as an example snippet of code, most other
+% languages are also usable. Configure them in the "CODE INCLUSION 
+% CONFIGURATION" section.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{subcaption}
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassTime): \hmwkTitle} % Top center head
+%\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+\lstloadlanguages{Perl} % Load Perl syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+\lstset{language=Perl, % Use Perl in this example
+        frame=single, % Single frame around code
+        basicstyle=\small\ttfamily, % Use small true type font
+        keywordstyle=[1]\color{Blue}\bf, % Perl functions bold and blue
+        keywordstyle=[2]\color{Purple}, % Perl function arguments purple
+        keywordstyle=[3]\color{Blue}\underbar, % Custom functions underlined and blue
+        identifierstyle=, % Nothing special about identifiers                                         
+        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small, % Comments small dark green courier font
+        stringstyle=\color{Purple}, % Strings are purple
+        showstringspaces=false, % Don't put marks in string spaces
+        tabsize=5, % 5 spaces per tab
+        %
+        % Put standard Perl functions not included in the default language here
+        morekeywords={rand},
+        %
+        % Put Perl function parameters here
+        morekeywords=[2]{on, off, interp},
+        %
+        % Put user defined functions here
+        morekeywords=[3]{test},
+       	%
+        morecomment=[l][\color{Blue}]{...}, % Line continuation (...) like blue comment
+        numbers=left, % Line numbers on left
+        firstnumber=1, % Line numbers start with line 1
+        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+        stepnumber=5 % Line numbers go in steps of 5
+}
+
+% Creates a new command to include a perl script, the first parameter is the filename of the script (without .pl), the second parameter is the caption
+\newcommand{\perlscript}[2]{
+\begin{itemize}
+\item[]\lstinputlisting[caption=#2,label=#1]{#1.pl}
+\end{itemize}
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+%\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+%\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+%\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+%\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkPartCounter} % Creates a counter to keep track of the number of problems
+\setcounter{homeworkPartCounter}{0}
+
+\newcommand{\homeworkPartName}{}
+\newenvironment{homeworkPart}[1][Part \arabic{homeworkPartCounter}]{ % Makes a new environment called homeworkPart which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkPartCounter} % Increase counter for number of problems
+\renewcommand{\homeworkPartName}{#1} % Assign \homeworkPartName the name of the problem
+\section{\homeworkPartName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkPartName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkPartName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkPartName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkPartName} % Header and footer after the environment
+}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Project 2} % Assignment title
+\newcommand{\hmwkDueDate}{Monday,\ February\ 26,\ 2018} % Due date
+\newcommand{\hmwkClass}{CSC411} % Course/class
+\newcommand{\hmwkClassTime}{L5101} % Class/lecture time
+\newcommand{\hmwkAuthorName}{Anas Al-Raheem} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+\clearpage
+%----------------------------------------------------------------------------------------
+%	Part 1 & 2
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\begin{homeworkPart}
+
+The data-set consists of about $6000$ images for each digit, representing 0 to 9, each image is of the size $28 \times 28$-pixel. For each digit there is a huge variety of styles of writing, different in size, shape and alignment of the digit. We can see that most of the digits have some unique parts that allows the program to work properly and be able to build a classifier. Below is a sample of the digits:
+
+\begin{figure*}[h!]
+    \includegraphics[scale=1.15]{part1_digits.png}
+    \caption{Digits Sample}
+    \label{fig:Digits}
+\end{figure*}
+
+\end{homeworkPart}
+\clearpage
+
+\begin{homeworkPart}
+
+The code below represent the required neural network:
+
+\begin{verbatim}
+def softmax(y):
+    return exp(y) / tile(sum(exp(y), 0), (len(y), 1))
+
+def forward(x, W0, b0):
+    L0 = dot(W0.T, x) + b0
+    output = softmax(L0)
+    return L0, output
+
+def get_performance(x, y, W0, b0):
+    L0, output = forward(x, W0, b0)
+    expected = np.array([i.tolist().index(1) for i in y.T])
+    actual = np.array([i.tolist().index(max(i)) for i in output.T])
+    results = (expected == actual)
+    true_num = results.tolist().count(True)
+    performance = true_num / float(output.shape[1])
+    return performance * 100
+
+def cost(x, W0, b0, y):
+    L0, p = forward(x, W0, b0)
+    while p.min() < 1e-323:
+        ind = np.unravel_index(np.argmin(p, axis=None), p.shape)
+        p[ind] = 1e-323
+    return -np.sum(y * np.log(p))
+
+def get_prediction(W0, b0, x):
+    x = test_x
+    L0, output = forward(x, W0, b0)
+    y = np.argmax(output, 0)
+    print y
+    return y
+\end{verbatim}
+
+\end{homeworkPart}
+\clearpage
+%----------------------------------------------------------------------------------------
+%	Part 3 & 4
+%----------------------------------------------------------------------------------------
+
+
+
+\begin{homeworkPart}
+
+A):\\\\
+We have the following functions:\\
+The cost function $$C = -y_{i}\log P_{i}$$\\
+The probability $$P_{i} = \frac{e^{o_{i}}}{\sum_{k}e^{o_{k}}}$$\\
+The output unit $$o_{i} = \sum_{j}w_{ji}x_{j} + b_{i}$$\\
+
+The gradient of the cost function in respect to $w_{ij}$ (*):\\
+$$\frac{\partial C}{\partial w_{ij}} = \sum_{k}\frac{\partial{C}}{\partial{P_{k}}}\frac{\partial P_{k}}{\partial o_{i}}\frac{\partial o_{i}}{\partial w_{ij}}$$\\
+
+We need to calculate each part of the derivative:\\
+
+1:\\
+$$\frac{\partial C}{\partial P_{j}} = -\frac{y_{j}}{P_{j}}$$
+
+2:\\
+$$\frac{\partial P_{i}}{\partial o_{i}} = \frac{(\sum_{k}e^{o_{k}})e^{o_{i}} - e^{o_{i}} * e^{o_{i}}}{(\sum_{k}e^{o_{k}})^{2}}$$\\
+$$\frac{\partial P_{i}}{\partial o_{i}} = \frac{e^{o_{i}(\sum_{k}e^{o_{k}} - e^{o_{i}})}}{(\sum_{k}e^{o_{k}})^{2}} $$\\
+$$\frac{\partial P_{i}}{\partial o_{i}} = \frac{e^{o_{i}}}{\sum_{k}e^{o_{k}}}\frac{\sum_{k}e^{o_{k}} - e^{o_{i}}}{\sum_{k}e^{o_{k}}}$$\\
+$$\frac{\partial P_{i}}{\partial o_{i}}= P_{i}(1 - P_{i})$$\\
+
+3:\\
+$$\frac{\partial P_{j}}{\partial o_{i}} = \frac{(\sum_{k}e^{o_{k}})0 - e^{o_{j}} * e^{o_{i}}}{(\sum_{k}e^{o_{k}})^{2}}$$\\
+$$\frac{\partial P_{j}}{\partial o_{i}} = -\frac{e^{o_{j}} * e^{o_{i}}}{(\sum_{k}e^{o_{k}})^{2}}$$\\
+$$\frac{\partial P_{j}}{\partial o_{i}} = -\frac{e^{o_{j}}}{\sum_{k}e^{o_{k}}}\frac{e^{o_{i}}}{\sum_{k}e^{o_{k}}}$$\\
+$$\frac{\partial P_{j}}{\partial o_{i}} = -P_{j}P_{i}$$\\
+
+4:\\
+$$\frac{\partial o_{i}}{\partial w_{ij}} = x_{j}$$\\
+
+Now we substitute in (*):
+$$\frac{\partial C}{\partial w_{ij}} = \frac{\partial C}{\partial P_{i}}\frac{\partial P_{i}}{\partial o_{i}}\frac{\partial o_{i}}{\partial w_{ij}} + \sum_{k \neq i} \frac{\partial C}{\partial P_{k}}\frac{\partial P_{k}}{\partial o_{i}}\frac{\partial o_{i}}{\partial w_{ij}}$$
+$$\frac{\partial C}{\partial w_{ij}} = -\frac{y_{i}}{P_{i}}P_{i}(1 - P_{i})x_{j} + \sum_{k \neq i} \frac{y_{k}}{P_{k}}P_{i}P_{k}x_{j}$$\\
+$$\frac{\partial C}{\partial w_{ij}} = -y_{i}x_{j} + y_{i}P_{i}x_{j} + P_{i}x_{j}\sum_{k \neq i}y_{k}$$\\
+$$\frac{\partial C}{\partial w_{ij}} = -y_{i}x_{j} +  P_{i}x_{j}(y_{i} + \sum_{k \neq i}y_{k})$$\\
+$$\frac{\partial C}{\partial w_{ij}} = -y_{i}x_{j} +  P_{i}x_{j}(\sum_{k}y_{k})$$\\
+We are using one hot encoding thus all y values will be 0 except 1, thus the sum is 1.\\
+$$\frac{\partial C}{\partial w_{ij}} = -y_{i}x_{j} +  P_{i}x_{j}$$\\
+$$\frac{\partial C}{\partial w_{ij}} = x_{j}(P_{i} - y_{i})$$\\
+That was the gradient with one image, for m number of images we will have:
+$$\frac{\partial C}{\partial w_{ij}} = \sum_{m}x_{j}^{m}(P_{i}^{m} - y_{i}^{m})$$\\
+
+
+B):\\\\
+Below is the code for the computation:
+\begin{verbatim}
+# gradient of the cost function with respect to the weights
+def dw_cost(x, W0, b0, y):
+    L0, p = forward(x, W0, b0)
+    dCdL0 = p - y
+    dCdW0 = dot(x, dCdL0.T)
+    return dCdW0
+
+# gradient of the cost function with respect to the biases
+def db_cost(x, W0, b0, y):
+    L0, p = forward(x, W0, b0)
+    dCdL0 = p - y
+    dCdb0 = np.sum(dCdL0, 1)
+    return dCdb0.reshape(10, 1)
+\end{verbatim}
+We can see the finite differences using the function $test\_gradient(W0, b0, x, y)$:
+\begin{verbatim}
+def test_gradient(W0, b0, x, y):
+    h = 1e-5
+
+    c1 = cost(x, W0, b0, y)
+    W02 = W0.copy()
+    W02[127][0] += h
+    c2 = cost(x, W02, b0, y)
+    diff = (c2 - c1) / h
+    dc = dw_cost(x, W0, b0, y)
+    print "weight gradient1:", dc[127][0], diff
+    W02 = W0.copy()
+    W02[272][7] += h
+    c2 = cost(x, W02, b0, y)
+    diff = (c2 - c1) / h
+    dc = dw_cost(x, W0, b0, y)
+    print "weight gradient2:", dc[272][7], diff
+    
+    b02 = b0.copy()
+    b02[0] += h
+    c2 = cost(x, W0, b02, y)
+    diff = (c2 - c1) / h
+    dc = db_cost(x, W0, b0, y)
+    print "bias gradient1:", dc[0], diff
+    b02 = b0.copy()
+    b02[8] += h
+    c2 = cost(x, W0, b02, y)
+    diff = (c2 - c1) / h
+    dc = db_cost(x, W0, b0, y)
+    print "bias gradient2:", dc[8], diff
+\end{verbatim}
+and the out put is:
+\begin{verbatim}
+weight gradient1: -0.17840041969105483 -0.178400400407952
+weight gradient2: 0.10674925863689534 0.10674973540680809
+bias gradient1: [-0.8920021] -0.8920016167479615
+bias gradient2: [0.10321209] 0.10321255605738598
+\end{verbatim}
+
+\end{homeworkPart}
+\clearpage
+
+\begin{homeworkPart}
+The code used to initialize the weights and biases:
+\begin{verbatim}
+np.random.seed(0)
+W0 = np.random.uniform(-0.01, 0.01, (784, 10))
+b0 = np.random.uniform(-0.01, 0.01, (10, 1))
+alpha = 1e-5
+\end{verbatim}
+I noticed that a learning rate greater than $10^-5$ either would crash the program or would cause lower performance, probably due to the high learning rate we are skipping over the global minimum repeatedly. Smaller learning rates caused slow convergence and would require more iterations to reach the same performance.\\
+Regarding the weights and biases, they are randomly taken from a uniform distribution. I had some problems with log(0) and as the prof advised on Piazza I kept the numbers close to 0, in addition I added a condition to prevent log(0) from happening, by changing the values that cause this error to $10^{-323}$ (As I saw the error was caused by values smaller).
+\begin{figure*}[h!]
+    \includegraphics[scale=1]{part4_learning_curve.png}
+    \caption{Learning Curve Without Momentum}
+    \label{fig:Learning Curve}
+\end{figure*}
+\\\\\\
+Below are the weights:
+\begin{figure*}[h!]
+    \includegraphics[scale=1]{part4_weights.png}
+    \caption{Part 4, Weights For Each Digit}
+    \label{fig:Weights}
+\end{figure*}
+
+\end{homeworkPart}
+
+\clearpage
+%----------------------------------------------------------------------------------------
+%	Part 5 & 6
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkPart}
+We can see from the learning curve below, that using momentum we reach the same performance but with only 300 iterations vs. 1000 iteration when running the gradient descent without momentum. Note that all other parameters are the same for both runs. 
+\begin{figure*}[h!]
+    \includegraphics[scale=1]{part5_learning_curve.png}
+    \caption{Learning Curve With Momentum}
+    \label{fig:Learning Curve}
+\end{figure*}
+
+The same function was used for both part4 and part5. The function has an argument "momentum" that enables momentum gradient descent. Note: the function updates the biases as well, as the profs wanted (based on a Piazza post).
+\begin{verbatim}
+def gradient_descent(x, y, validation_x,validation_y, init_W, b0, alpha, max_iter = 2500, momentum = 0):
+    EPS = 1e-5  # EPS = 10**(-5)
+    prev_W = init_W - 10 * EPS
+    W0 = init_W.copy()
+
+    if momentum != 0:
+        v = 1
+        vb = 1
+        name = "part5"
+    else:
+        name = "part4"
+
+    results = {}
+    iter = 0
+    while norm(W0 - prev_W) > EPS and iter < max_iter:
+        prev_W = W0.copy()
+        c0 = cost(x, W0, b0, y)
+        results[iter] = [get_performance(x, y, W0, b0), get_performance(validation_x, validation_y, W0, b0)]
+        new_W = dw_cost(x, W0, b0, y)
+        new_b = db_cost(x, W0, b0, y)
+        if momentum != 0:
+            v = momentum * v + (alpha * new_W)
+            vb = momentum * vb + (alpha * new_b)
+            W0 -= v
+            b0 -= vb
+        else:
+            W0 -= (alpha * new_W)
+            b0 -= (alpha * new_b)
+        if iter % 100 == 0:
+            print "Iter", iter
+            print "cost = ", c0
+        iter += 1
+    print "Iter", iter
+    print "cost = ", c0
+    learning_curve(results, name)
+    if momentum == 0:
+        W_images(W0, name)
+    return W0
+\end{verbatim}
+
+\end{homeworkPart}
+\clearpage
+
+\begin{homeworkPart}
+For parts A,B and C they are all plotted on the figure below:
+\begin{figure*}[h!]
+    \includegraphics[scale=1]{part6_Contour_plot.png}
+    \caption{Contour Plot}
+    \label{fig:Contour Plot}
+\end{figure*}
+
+D):\\
+Both trajectories on the contour plot were run with the same parameters, and we can see that momentum trajectory reaches the desired performance faster than no momentum trajectory. The plot displays the benefits of momentum in decreasing required time to reach the minimum (this can also be seen from the learning curves in part4 and part5).\\
+
+E):\\
+For this part different values for w1, w2 were attempted and based on the contour plots I selected the best values for w1, w2. I noticed values that are away from the edges provided better plots, while those close to the edge didn't produce a contour sometime (result in warning:"No contour levels were found"). I Also experimented with the range of values to replace w1, w2 with. For bigger ranges I noticed the trajectories were to small to be easily distinguishable, for smaller ranges the trajectories will be out of scope. 
+
+\end{homeworkPart}
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	Part 7 & 8
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkPart}
+
+For this part we assume we have N hidden layers without the input or output layer. If we were to calculate the gradient with respect each unit without caching:
+We have N layers, each with K units.\\
+For the top layer for each unit we need to calculate the gradient with respect to K units in each layer underneath. Thus N * K for each unit in the top layer, therefore we will have N * K * K for the top layer.\\
+For the second layer from the top, for each unit (N-1) * K, Thus for all the layer we do (N-1) * K * K.\\
+
+Thus for all the layers: $ N * K^2 + (N-1) * K^2 + .... + 1 * K^2 \Longrightarrow K^2 * (N + (N - 1) + .... + 1)$
+$\Longrightarrow K^2 * \frac{N * (N - 1)}{2} \Longrightarrow  O(K^2 * N^2)$\\
+
+For Back propagation, we have a matrix of size K * K, we need to multiply it by a matrix of size K * K we then multiply the result with a matrix of size 1 * K. this is done for each layer.\\
+if $K > n$ then total complexity is: $O(n * K^2)$.
+
+\end{homeworkPart}
+
+\begin{homeworkPart}
+Performance on test set: $\% 0.833333333333$
+\begin{figure*}[h!]
+    \includegraphics[scale=1]{part8_learning_curve.png}
+    \caption{Learning Curve}
+    \label{fig:Learning Curve}
+\end{figure*}
+
+For this neural network, I used gray images (the same used for Project 1) of the size $32 \times 32$. Thus the input layer was of size $32 \times 32$. For the hidden layer I used 12 units and the output is 6 units. I noticed that increasing the number of hidden units sometimes slightly improve the performance (depending on the learning rate) but also increased computation time. I decided to choose 12 hidden units as it provided the highest performance and the computation ran quickly. The weights were initialized by the default pytorch module. I used ReLU activation as it gave me slightly better results than Tanh. For the batch size, 16 image per actor produced the best performance.
+
+
+\end{homeworkPart}
+
+\clearpage
+
+
+%----------------------------------------------------------------------------------------
+%	Part 9 & 10
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkPart}
+For this part I choose baldwin and bracco, I performed a forward pass with the test data for each actor (20 images per actor) then I ran the loss function and performed back propagation. Looking at the gradient of the weights connecting the hidden units to the output layer for baldwin or bracco (connecting to output units: 0 for baldwin and 3 for bracco), if the gradient is not zero that means the hidden unit is useful in classifying the actor.
+Below are the visualizations of the hidden units 
+
+\begin{figure*}[h!]
+    \includegraphics[scale=1]{part9_baldwin_weights.png}
+    \caption{baldwin weights}
+    \label{fig:Learning Curve}
+\end{figure*}
+\begin{figure*}[h!]
+    \includegraphics[scale=1]{part9_bracco_weights.png}
+    \caption{bracco weights}
+    \label{fig:Learning Curve}
+\end{figure*}
+
+\end{homeworkPart}
+\clearpage
+
+\begin{homeworkPart}
+
+In order to extract the activations I changed myalexnet.py file to only run the network up until Conv4 layer, this was done by removing the classifier method call in the forward function. The output is then used as an input in a neural network similar to the one built in part 8. The input is images of size 9216, that are connected to 64 hidden unit, and then 6 output units. I also attempted to extract a different layer , layer Conv3, by removing the computation that followed from the model, but I got worse performance then when the same training was done on Conv4 activations (validation set performance $< 45\%$). I tried using a ReLU activation function, but noticed that Tanh provided a higher performance with the same settings.
+
+\begin{figure*}[h!]
+    \includegraphics[scale=1]{part10_learning_curve.png}
+    \caption{Learning Curve}
+    \label{fig:Learning Curve}
+\end{figure*}
+
+\end{homeworkPart}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
